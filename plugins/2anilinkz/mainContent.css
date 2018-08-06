@@ -1,0 +1,166 @@
+body {
+    padding: 0px;
+    margin: 0px; 
+    overflow: hidden;
+}
+
+table {
+    border-spacing: 0px;
+}
+
+table tr td {
+    vertical-align: top;
+}
+
+#topBar {
+    position:fixed;
+    top:2px;
+    height: 50px;
+    width: 100%;
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
+    border-color: black;
+}
+
+#title {
+    cursor: pointer;
+    position: fixed;
+    top: 10px;
+    left: 6px;
+    color: white;
+    font-size: 2em;
+}
+
+#search {
+    position: fixed;
+    overflow: hidden;
+    top: 10px;
+    right: 5px;
+    border-width: 8px;
+    background-color: #99AAB5;
+    color: white;
+    padding-left: 5px;
+}
+
+#search input {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: inline-block;
+    background-color: #99AAB5;
+    border-style: none;
+    color: white;
+}
+
+#searchBtn {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px;
+    height:20px;
+    background-color: #99AAB5;
+}
+
+#searchBtn:hover {
+    background-color: #2C2F33;
+}
+
+#mainContent {
+    width: 100%;
+}
+
+#player {
+    width: 600px;
+    padding-top: 10px;
+}
+
+table {
+    border-spacing: 0px;
+}
+
+#prev {
+    cursor: pointer;
+    color: white;
+    width: 300px;
+}
+
+#next {
+    cursor: pointer;
+    color: white;
+    width: 300px;
+}
+
+#prev:hover {
+    background-color: #2C2F33;
+}
+
+#next:hover{
+    background-color: #2C2F33;
+}
+
+#searchResults {
+    width: 100%;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+    overflow: hidden;
+    border-bottom-color: black;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+.animeItem {
+    padding: 5px;
+    height: 200px;
+    width: 200px;
+}
+
+.innerAnimeItem {
+    cursor: pointer;
+    border-style: solid;
+    border-color: #99AAB5;
+    border-width: 2px;
+    height: 175px;
+    border-radius: 15%;
+    width: 150px;
+    color: white;
+}
+
+.innerAnimeItem img {
+    padding-top: 10px;
+}
+
+#hideSearch {
+    background-color: #99AAB5;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    text-align: right;
+    width: 35px;
+    padding: 5px;
+    right: 5px;
+}
+
+#hideSearch:hover {
+    background-color: #2C2F33;
+}
+
+#animeTitle {
+    color: white;
+    font-size: 1.5em;
+}
+
+#animeEpisode {
+    color: white;
+}
+
+#animeEpisodes {
+    color: white;
+    width: 200px;
+    border-right-color: black;
+    border-right-style: solid;
+    border-right-width: 2px;
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
+}
+
+#animeEpisodesSelect {
+    overflow-y: scroll;
+}

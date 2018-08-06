@@ -1,0 +1,160 @@
+body {
+    padding: 0px;
+    margin: 0px; 
+    overflow: hidden;
+}
+
+#title-bar {
+    -webkit-app-region: drag;
+    position: fixed;
+    width: 100%;
+    height: 24px;
+    top: 0px;
+    background-color: #23272A;
+    padding: none;
+    margin: 0px; 
+    border-bottom: 8px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+
+#minBtn:hover {
+    background-color: #2C2F33;
+}
+
+#maxBtn:hover {
+    background-color: #2C2F33;
+}
+
+#closeBtn:hover {
+    background-color: red;
+}
+
+#title {
+    top: 2px;
+    left: 6px;
+    color: white;
+    position: fixed;
+}
+
+#title-bar-btns {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+#title-bar-btns div {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#mainSidebar {
+    overflow: hidden;
+    padding: 10px 0 10px 10px;
+    background-color: #23272A;
+    border-color: black;
+    border-right-style: solid;
+    border-right-width: 2px;
+    width: 70px;
+    padding-top: 24px;
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
+}
+
+
+.pluginImage {
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    display: block;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.pluginImage:hover {
+    border-radius: 25%;
+}
+
+table tr td {
+    padding: 24px 0px 0px 0px;
+    vertical-align: top;
+    border-width: 0px;
+}
+
+table {
+    border-spacing: 0px;
+}
+
+#malSidebar {
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+    background-color: #23272A;
+    overflow: hidden;
+    border-right: 2px;
+    border-color: black;
+    border-style: solid;
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
+}
+
+#malImage {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#malSidebar h2 {
+    padding: 5px;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+}
+
+#malSidebar h4 {
+    padding: 5px;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+}
+
+#malSidebar h2:hover {
+    background-color: #2C2F33;
+}
+
+#malSidebar h4:hover {
+    background-color: #2C2F33;
+}
+
+#mainContent {
+    background-color: #23272A;
+    width: 100%;
+    color: white;
+}
+
+.pluginContent {
+    border: none;
+    width: 100%;
+}
+
+.triangle{
+    fill: transparent;
+    stroke: white;
+    stroke-width: 8;
+    transition: all 0.8s ease-in-out;
+    transform-origin: 250px 250px;
+}
+
+.triangle:hover {
+        transform: rotate(180deg); 
+}
+
+#openMAL {
+    position:fixed;
+    bottom: 10px;
+}
