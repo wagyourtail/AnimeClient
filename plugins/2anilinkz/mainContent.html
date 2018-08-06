@@ -1,65 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Anilinkz</title>
-    
-    <link rel="stylesheet" href="./mainContent.css">
-</head>
-<body>
-    <table width="100%">
-        <tr>
-            <td height="50px">
-            <div id="topBar">
-                <div id="title">AniLinkz</div>
-                <div id="search"><input type=text><div id="searchBtn"><img src="./search.ico" alt="search"></div></div>
-            </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <div id="searchResults" style="height: 200px;">
-                <div id="hideSearch">Hide</div>
-                <div class="animeItem" id="${result.link}"><div class="innerAnimeItem" onclick="openAnime('${result.link}')"><center><img src="../../src/malImg.png" width="100px"><a>${result.title}</a></center></div></div>
-            </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <div id="mainContent">
-                <table width="100%">
-                    <tr>
-                        <td width="200px">
-                        <div id="animeEpisodes">
-                            <center>
-                                <div id="animeEpisodesHead">Episodes</div>
-                                <div id="animeEpisodesSelect"></div>
-                            </center>
-                        </div>
-                        </td>
-                        <td>
-                            <center>
-                                <div id="animeTitle">Anime Title</div>
-                                <div id="animeEpisode">Episode 0</div>
-                                <div id="player">
-                                    <iframe id="video" height="400px" width="600px">
+<table width="100%" id="pluginTable">
+    <tr>
+        <td height="56px">
+        <div id="topBar">
+            <div id="pluginTitle">AniLinkz</div>
+            <div id="search"><input type=text><div id="searchBtn"><img src="./search.ico" alt="search"></div></div>
+        </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <div id="searchResults" style="height: 200px;">
+            <div id="hideSearch">Hide</div>
+            <div class="animeItem" id="${result.link}"><div class="innerAnimeItem" onclick="openAnime('${result.link}')"><center><img src="../../src/malImg.png" width="100px"><a>${result.title}</a></center></div></div>
+        </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <div id="pluginMainContent">
+            <table width="100%" id="pluginTable">
+                <tr>
+                    <td width="200px">
+                    <div id="animeEpisodes">
+                        <center>
+                            <div id="animeEpisodesHead">Episodes</div>
+                            <div id="animeEpisodesSelect"></div>
+                        </center>
+                    </div>
+                    </td>
+                    <td>
+                        <center>
+                            <div id="animeTitle">Anime Title</div>
+                            <div id="animeEpisode">Episode 0</div>
+                            <div id="player">
+                                <iframe id="video" height="400px" width="600px">
 
-                                    </iframe>
-                                    <table>
-                                        <tr>
-                                            <td id="prev"><center><---</center></td>
-                                            <td id="next"><center>---></center></td>
-                                        </tr>    
-                                    </table>
-                                </div>
-                            </center>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            </td>
-        </tr>
-    </table>
-    <script src="./mainContent.js"></script>
-    </body>
-</html>
+                                </iframe>
+                                <table>
+                                    <tr>
+                                        <td id="prev"><center><---</center></td>
+                                        <td id="next"><center>---></center></td>
+                                    </tr>    
+                                </table>
+                            </div>
+                        </center>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </td>
+    </tr>
+</table>
+<script src="./mainContent.js"></script>

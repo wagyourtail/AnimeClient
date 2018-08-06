@@ -14,7 +14,7 @@ table tr td {
 
 #topBar {
     position:fixed;
-    top:2px;
+    top:26px;
     height: 50px;
     width: 100%;
     border-bottom-width: 4px;
@@ -22,11 +22,10 @@ table tr td {
     border-color: black;
 }
 
-#title {
+#pluginTitle {
     cursor: pointer;
     position: fixed;
-    top: 10px;
-    left: 6px;
+    top: 34px;
     color: white;
     font-size: 2em;
 }
@@ -34,7 +33,7 @@ table tr td {
 #search {
     position: fixed;
     overflow: hidden;
-    top: 10px;
+    top: 36px;
     right: 5px;
     border-width: 8px;
     background-color: #99AAB5;
@@ -63,17 +62,13 @@ table tr td {
     background-color: #2C2F33;
 }
 
-#mainContent {
+#pluginMainContent {
     width: 100%;
 }
 
 #player {
     width: 600px;
     padding-top: 10px;
-}
-
-table {
-    border-spacing: 0px;
 }
 
 #prev {
@@ -163,4 +158,8 @@ table {
 
 #animeEpisodesSelect {
     overflow-y: scroll;
+}
+
+#pluginTable tr td{
+    padding: 0px;
 }

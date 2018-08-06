@@ -135,10 +135,16 @@ table {
     background-color: #23272A;
     width: 100%;
     color: white;
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
 }
 
 .pluginContent {
     border: none;
+    width: 100%;
+}
+
+.pluginContent {
     width: 100%;
 }
 

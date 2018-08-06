@@ -1,6 +1,10 @@
 const electron = require("electron");
 const fs = require("fs");
+const theme = require("../../ThemePack/loadTheme.js");
 const remote = electron.remote;
+console.log(__dirname);
+
+theme.load(document, "index");
 
 // --- minmaxclose Buttons --- //
 const minBtn = document.getElementById("minBtn");
@@ -97,8 +101,12 @@ let activate = (plugin) => {
     console.log(avail);
     if (!avail) {
         //console.log(fs.readFileSync(`./plugins/${plugin}/mainContent.html`));
-        document.getElementById("mainContent").innerHTML = `${document.getElementById("mainContent").innerHTML}<iframe class="pluginContent" id="${plugin}" src=${`../../plugins/${plugin}/mainContent.html`}>`;
+        document.getElementById("mainContent").innerHTML = `${document.getElementById("mainContent").innerHTML}<div class="pluginContent" id="${plugin}">${fs.readFileSync(`./plugins/${plugin}/mainContent.html`)}</div>`;
+        require(`../../plugins/${plugin}/mainContent.js`).run();
     }
+    document.getElementById("pluginStyle").setAttribute("href", `../../plugins/${plugin}/mainContent.css`);
+    theme.load(document, plugin);
+
     Array.from(document.getElementsByClassName("pluginContent")).forEach((element) => {
         if (element.getAttribute("id") == plugin) {
              element.style.display = "block";
