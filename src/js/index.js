@@ -29,27 +29,6 @@ closeBtn.addEventListener('click', (event) => {
 // --- plugin load --- //
 const mainSidebar = document.getElementById("mainSidebar");
 
-let increaseTo50 = (plugin) => {
-    let pl = document.getElementById(plugin);
-    let val = parseInt(pl.style.borderRadius.slice(0,2));
-    if (val < 50) {
-        val++;
-        pl.style.borderRadius = `${val}%`;
-        setTimeout(()=>{increaseTo50(plugin)}, 10)
-    }
-}
-
-let decreaseTo25 = (plugin) => {
-    let pl = document.getElementById(plugin);
-    let val = parseInt(pl.style.borderRadius.slice(0,2));
-    if (val > 25) {
-        val--;
-        pl.style.borderRadius = `${val}%`;
-        setTimeout(()=>{decreaseTo25(plugin)}, 10)
-    }
-}
-
-
 for (let plugin of fs.readdirSync("./plugins/")) {
     mainSidebar.innerHTML = `<div><img id="${plugin}" class="pluginImage" src="../../plugins/${plugin}/icon.png" width="58" height="58"/></div>\n${mainSidebar.innerHTML}`;
 }
