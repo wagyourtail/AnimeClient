@@ -23,6 +23,12 @@ function createWindow() {
         win = null;
     });
     
+    win.webContents.executeJavaScript(`
+    sourcesLoad.src = "file:///${path.join(__dirname, 'src/html/sources.html').split("\\").join("/")}";
+    searchPanelLoad.src = "file:///${path.join(__dirname, 'src/html/searchPanel.html').split("\\").join("/")}";
+    rightbarLoad.src = "file:///${path.join(__dirname, 'src/html/rightbar.html').split("\\").join("/")}";
+    `)
+
     /*
     let menu = Menu.buildFromTemplate([{
         label: 'Menu',

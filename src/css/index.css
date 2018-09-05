@@ -1,166 +1,121 @@
 body {
-    padding: 0px;
-    margin: 0px; 
+    cursor: auto;
+    -webkit-user-select: none;
+    margin:0px;
     overflow: hidden;
 }
 
-#title-bar {
-    -webkit-app-region: drag;
-    position: fixed;
-    width: 100%;
-    height: 24px;
-    top: 0px;
-    background-color: #23272A;
-    padding: none;
-    margin: 0px; 
-    border-bottom: 8px;
-    border-bottom-style: solid;
-    border-bottom-color: black;
-}
-
-#minBtn:hover {
-    background-color: #2C2F33;
-}
-
-#maxBtn:hover {
-    background-color: #2C2F33;
-}
-
-#closeBtn:hover {
-    background-color: red;
+::-webkit-scrollbar { 
+    display: none; 
 }
 
 #title {
-    top: 2px;
-    left: 6px;
-    color: white;
-    position: fixed;
+    -webkit-app-region:drag;
+    cursor: pointer;
 }
 
-#title-bar-btns {
-    -webkit-app-region: no-drag;
-    position: fixed;
-    top: 0px;
-    right: 0px;
+#titlebar {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto 50px 30px 30px 30px;
+    height: 20px;
+    overflow: hidden;
+    border-bottom: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    background-color: white;
 }
 
-#title-bar-btns div {
-    padding-left: 5px;
+#titlebar div {
+    padding-left: 10px;
     padding-right: 5px;
 }
 
-#mainSidebar {
-    overflow: hidden;
-    padding: 10px 0 10px 10px;
-    background-color: #23272A;
-    border-color: black;
-    border-right-style: solid;
-    border-right-width: 2px;
-    width: 70px;
-    padding-top: 24px;
-    margin-bottom: -5000px;
-    padding-bottom: 5000px;
+#minBtn:hover {
+    background-color: #dddddd;
+}
+
+#maxBtn:hover {
+    background-color: #dddddd;
+}
+
+#closeBtn:hover {
+    background-color: #ff2222;
 }
 
 
-.pluginImage {
-    -webkit-transition: all 1s ease;
-    transition: all 1s ease;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 60px;
-    height: 60px;
-    margin: 0;
-    display: block;
-    cursor: pointer;
-    border-radius: 50%;
+
+
+#content {
+    width:100%;
+    background-image: url("../../background.jpg");
+    background-size: cover;
 }
 
-.pluginImage:hover {
-    border-radius: 25%;
-}
-
-table tr td {
-    padding: 24px 0px 0px 0px;
-    vertical-align: top;
-    border-width: 0px;
-}
-
-table {
-    border-spacing: 0px;
-}
-
-#malSidebar {
-    -webkit-transition: all 1s ease;
-    transition: all 1s ease;
-    background-color: #23272A;
-    overflow: hidden;
-    border-right: 2px;
-    border-color: black;
+#content div {
     border-style: solid;
-    margin-bottom: -5000px;
-    padding-bottom: 5000px;
+    border-width: 2px;
 }
 
-#malImage {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-#malSidebar h2 {
-    padding: 5px;
-    color: white;
-    width: 100%;
-    cursor: pointer;
-}
-
-#malSidebar h4 {
-    padding: 5px;
-    color: white;
-    width: 100%;
-    cursor: pointer;
-}
-
-#malSidebar h2:hover {
-    background-color: #2C2F33;
-}
-
-#malSidebar h4:hover {
-    background-color: #2C2F33;
-}
-
-#mainContent {
-    background-color: #23272A;
-    width: 100%;
-    color: white;
-    margin-bottom: -5000px;
-    padding-bottom: 5000px;
-}
-
-.pluginContent {
-    border: none;
-    width: 100%;
-}
-
-.pluginContent {
-    width: 100%;
-}
-
-.triangle{
-    fill: transparent;
-    stroke: white;
-    stroke-width: 8;
-    transition: all 0.8s ease-in-out;
-    transform-origin: 250px 250px;
-}
-
-.triangle:hover {
-        transform: rotate(180deg); 
-}
-
-#openMAL {
+#leftbar {
+    background-color: rgba(64, 64, 64, .2);
+    z-index: 1;
     position:fixed;
-    bottom: 10px;
+    left: 0px;
+    top: 20px;
+    width: 100px;
+    border-color: black;
+}
+
+#searchBtn {
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+}
+
+#maincontent {
+    z-index: 0;
+    position:fixed;
+    left: 100px;
+    top: 20px;
+    right: 100px;
+    border-color:red;
+}
+
+#searchPanel {
+    z-index: 1;
+    transition: .5s ease all;
+    position: fixed;
+    overflow-x: none;
+    overflow-y: scroll;
+    background-color: rgba(64, 64, 64, .4);
+}
+
+#contentTitle {
+    color: white;
+}
+
+#contentSrc {
+    border: none;
+    background-color: rgba(64,64,64,.7);
+}
+
+#rightbar {
+    background-color: rgba(64, 64, 64, .2);
+    z-index: 2;
+    position:fixed;
+    right: 0px;
+    top: 20px;
+    width: 100px;
+    border-color: black;
+    transition: .5s ease all;
+}
+
+#sourcesLoad {
+    width: 100%;
+    background-color: rgba(64,64,64,.7);
+    height: 100%;
+}
+
+#rightbar:hover {
+    width: 300px;
 }
