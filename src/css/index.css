@@ -1,6 +1,5 @@
 body {
     cursor: auto;
-    -webkit-user-select: none;
     margin:0px;
     overflow: hidden;
 }
@@ -51,11 +50,6 @@ body {
     background-size: cover;
 }
 
-#content div {
-    border-style: solid;
-    border-width: 2px;
-}
-
 #leftbar {
     background-color: rgba(64, 64, 64, .2);
     z-index: 1;
@@ -63,13 +57,16 @@ body {
     left: 0px;
     top: 20px;
     width: 100px;
-    border-color: black;
 }
 
 #searchBtn {
+    margin-top: 10px;
     cursor: pointer;
     width: 80px;
     height: 80px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
 }
 
 #maincontent {
@@ -78,7 +75,10 @@ body {
     left: 100px;
     top: 20px;
     right: 100px;
-    border-color:red;
+}
+
+#maincontentInner {
+    transition: opacity .5s;
 }
 
 #searchPanel {
@@ -106,14 +106,13 @@ body {
     right: 0px;
     top: 20px;
     width: 100px;
-    border-color: black;
     transition: .5s ease all;
 }
 
-#sourcesLoad {
+#sources {
     width: 100%;
     background-color: rgba(64,64,64,.7);
-    height: 100%;
+    overflow-y: scroll;
 }
 
 #rightbar:hover {

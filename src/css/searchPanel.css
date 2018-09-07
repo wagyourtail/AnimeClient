@@ -1,0 +1,122 @@
+body {
+    cursor: auto;
+    margin:0px;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+#search {
+    position:fixed;
+    top: 0px;
+    background-color: rgba(64, 64, 64, .2);
+    padding: 10px;
+    width: 100%;
+}
+
+#searchInp {
+    border:none;
+    background-color: rgba(64, 64, 64, .2);
+    height: 40px;
+    color: white;
+    padding-left: 10px;
+}
+
+#searchInp:focus {
+    outline: none;
+    border-color: rgba(128,128,128,.5);
+    border-style: solid;
+    border-width: 1px;
+}
+
+#searchBtn {
+    background-color: rgba(64, 64, 64, .5);
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px;
+}
+
+#searchBtn:hover {
+    background-color: rgba(128,128,128,.5)
+}
+
+#source {
+    position:fixed;
+    bottom: 0px;
+    right: 0px;
+    color: white;
+}
+
+#source a {
+    color: white;
+}
+
+#content {
+    color: white;
+}
+
+#results {
+    position: fixed;
+    z-index: 0;
+    top: 60px;
+    width: 100%;
+    transition: opacity .5s;
+}
+
+.aniTile {
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgba(64, 64, 64, .2); 
+    width: 400px;
+}
+
+.aniTile img {
+    display: block;
+    height: 100px;
+    object-fit: contain;
+}
+
+.aniTile div {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+}
+
+.aniTile #title {
+    display: block;
+    font-size: 1.5em;
+}
+
+.aniTile #score {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right: solid white 1px;
+}
+
+.aniTile #eps {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: solid white 1px;
+}
+
+#episodes {
+    position: fixed;
+    z-index: 1;
+    overflow-y: scroll;
+    top: 60px;
+    width: 100%;
+    transition: opacity .5s;
+}
+
+.epTile {
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgba(64, 64, 64, .2);
+    width: 200px;
+    font-size: 1em;
+}

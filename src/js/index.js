@@ -1,18 +1,11 @@
-
-
+const electron = require("electron");
+const remote = electron.remote;
 
 
 // ---- WindowControls ---- //
 
 minBtn.addEventListener("click", () => {remote.BrowserWindow.getFocusedWindow().minimize()});
-maxBtn.addEventListener("click", () => {
-    let fullscreen = remote.BrowserWindow.getFocusedWindow().isFullScreen();
-    remote.BrowserWindow.getFocusedWindow().setFullScreen(!fullscreen);
-    topbar.setAttribute("style", fullscreen ? "height: 20px;" : "");
-    title.setAttribute("style", fullscreen ? "-webkit-app-region: drag;" : "");
-    imageview.setAttribute("style", fullscreen ? "margin-top: 20px;" : "")
-    imageviewLoad.style.height= `${fullscreen ? window.innerHeight-20 : window.innerHeight}px`
-});
+maxBtn.addEventListener("click", () => {remote.BrowserWindow.getFocusedWindow().maximize()});
 closeBtn.addEventListener("click", window.close);
 
 
@@ -27,15 +20,19 @@ window.addEventListener("resize", () => {
     maincontent.style.height = `${window.innerHeight-20}px`;
     rightbar.style.height = `${window.innerHeight-20}px`;
     searchPanel.style.height = `${window.innerHeight-20}px`;
+    searchPanelLoad.style.height = `${window.innerHeight-20}px`;
+    searchPanelLoad.style.width = `${window.innerWidth-200}px`;
     if (searchPanel.style.width != `0px`) {
-        searchPanel.style.width = `${maincontent.clientWidth}px`;
+        searchPanel.style.width = `${window.innerWidth-200}px`;
     }
 });
 
 searchBtn.addEventListener("click", () => {
     if (searchPanel.style.width == `0px`) {
-        searchPanel.style.width = `${maincontent.clientWidth}px`;
+        searchPanel.style.width = `${window.innerWidth-200}px`;
+        maincontentInner.style.opacity="0";
     } else {
         searchPanel.style.width = `0px`;
+        maincontentInner.style.opacity="1";
     }
 });
