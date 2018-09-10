@@ -18,11 +18,6 @@ function createWindow() {
 
     //win.webContents.openDevTools();
     
-    win.webContents.on('new-window', function(e, url) {
-        logData("stop popup", e)
-        logData("stop popup", url)
-        e.preventDefault();
-      });
     
     win.on('closed', () => {
         win = null;
