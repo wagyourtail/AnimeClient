@@ -1,38 +1,91 @@
-const electron = require("electron");
+const electron = require("electron")
+const fs = require("fs")
 const remote = electron.remote;
+let SRCnow = "";
+
+let retNext = () => {
+    searchPanelLoad.send("retPrevNext", 0)
+}
+
+let retPrev = () => {
+    searchPanelLoad.send("retPrevNext", 0)
+}
+
+let changeSrc = (src) => {
+    silentLoad.src = src
+    SRCnow = src
+}
+
+searchPanelLoad.addEventListener("ipc-message", (m) => {
+    if (m.channel == "setEp") {
+        let {current, index} = m.args[0]
+        retPrev = () => {
+            searchPanelLoad.send("retPrevNext", index+1)
+        }
+        retNext = () => {
+            searchPanelLoad.send("retPrevNext", index-1)
+        }    
+        
+        contentTitle.innerHTML = current.title
+        SRCnow = `https://anilinkz.to${current.src}`
+        silentLoad.src = `https://anilinkz.to${current.src}`
+        searchPanel.style.width = `0px`
+        maincontentInner.style.opacity="1"
+    }
+});
+
+silentLoad.addEventListener("dom-ready", () => {
+    silentLoad.setAudioMuted(true)
+})
+
+silentLoad.addEventListener("ipc-message", (m) => {
+    if (m.channel == "srcList") {
+        sources.innerHTML = ""
+        for (let a = 0; a < m.args[0].length; a++) {
+            sources.innerHTML = `${sources.innerHTML}\n<div class="${SRCnow == m.args[0][a].src ? "current" : "select"}" id="${m.args[0][a].src}" onclick="${SRCnow == m.args[0][a].src ? "//" : ""}changeSrc('${m.args[0][a].src}')">${m.args[0][a].site}</div>`;
+        }
+    } else if (m.channel == "currentSrc") {
+        contentSrc.src = m.args[0].src
+    } else {
+        console.log(m)
+    }
+})
+
 
 
 // ---- WindowControls ---- //
 
-minBtn.addEventListener("click", () => {remote.BrowserWindow.getFocusedWindow().minimize()});
-maxBtn.addEventListener("click", () => {remote.BrowserWindow.getFocusedWindow().maximize()});
+minBtn.addEventListener("click", () => {remote.BrowserWindow.getFocusedWindow().minimize()})
+maxBtn.addEventListener("click", () => {remote.BrowserWindow.getFocusedWindow().maximize()})
 closeBtn.addEventListener("click", window.close);
 
 
-content.style.height = `${window.innerHeight-20}px`;
-leftbar.style.height = `${window.innerHeight-20}px`;
-maincontent.style.height = `${window.innerHeight-20}px`;
-rightbar.style.height = `${window.innerHeight-20}px`;
-searchPanel.style.height = `${window.innerHeight-20}px`;
+content.style.height = `${window.innerHeight-20}px`
+leftbar.style.height = `${window.innerHeight-20}px`
+maincontent.style.height = `${window.innerHeight-20}px`
+rightbar.style.height = `${window.innerHeight-20}px`
+rightbarLoad.style.height = `${window.innerHeight-20}px`
+searchPanel.style.height = `${window.innerHeight-20}px`
 window.addEventListener("resize", () => {
-    content.style.height = `${window.innerHeight-20}px`;
-    leftbar.style.height = `${window.innerHeight-20}px`;
-    maincontent.style.height = `${window.innerHeight-20}px`;
-    rightbar.style.height = `${window.innerHeight-20}px`;
-    searchPanel.style.height = `${window.innerHeight-20}px`;
-    searchPanelLoad.style.height = `${window.innerHeight-20}px`;
-    searchPanelLoad.style.width = `${window.innerWidth-200}px`;
+    content.style.height = `${window.innerHeight-20}px`
+    leftbar.style.height = `${window.innerHeight-20}px`
+    maincontent.style.height = `${window.innerHeight-20}px`
+    rightbar.style.height = `${window.innerHeight-20}px`
+    searchPanel.style.height = `${window.innerHeight-20}px`
+    searchPanelLoad.style.height = `${window.innerHeight-20}px`
+    searchPanelLoad.style.width = `${window.innerWidth-200}px`
+    rightbarLoad.style.height = `${window.innerHeight-20}px`
     if (searchPanel.style.width != `0px`) {
-        searchPanel.style.width = `${window.innerWidth-200}px`;
+        searchPanel.style.width = `${window.innerWidth-200}px`
     }
 });
 
 searchBtn.addEventListener("click", () => {
     if (searchPanel.style.width == `0px`) {
-        searchPanel.style.width = `${window.innerWidth-200}px`;
-        maincontentInner.style.opacity="0";
+        searchPanel.style.width = `${window.innerWidth-200}px`
+        maincontentInner.style.opacity="0"
     } else {
-        searchPanel.style.width = `0px`;
-        maincontentInner.style.opacity="1";
+        searchPanel.style.width = `0px`
+        maincontentInner.style.opacity="1"
     }
 });

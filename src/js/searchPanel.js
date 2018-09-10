@@ -1,20 +1,26 @@
 const electron = require("electron")
 const request = require("request")
 const jsdom = require("jsdom")
-const shell = electron.shell
+//const shell = electron.shell
 const ipc = electron.ipcRenderer
+let epser = [];
 
-sendEpisode = (current,prev,next) => {
-    
+let sendEpisode = (current,index) => {
+    ipc.sendToHost("setEp", {current:current, index:index});
 }
 
+ipc.on("retPrevNext", (e, index)=> {
+    if (epser[index]) {
+        ipc.sendToHost("setEp", {current:{src:epser[index].getElementsByTagName("a")[0].href, title:epser[index].getElementsByTagName("a")[0].innerHTML}, index});
+    }
+});
 
 let loopedRequest = async (anime,x,max) => {
     request(`http://anilinkz.to/${anime}?page=${x}`, (err, res, body) => {
         body = new jsdom.JSDOM(body).window.document;
-
-        Array.from(body.getElementsByClassName("epser")).forEach(element => {
-            episodes.innerHTML = `<div class="epTile">${element.getElementsByTagName("a")[0].innerHTML}</div>\n${episodes.innerHTML}`;
+        epser = Array.from(body.getElementsByClassName("epser"));
+        epser.forEach((element, index) => {
+            episodes.innerHTML = `<div class="epTile" id="${element.getElementsByTagName("a")[0].innerHTML}" onclick="sendEpisode({src:'${element.getElementsByTagName("a")[0].href}', title:'${element.getElementsByTagName("a")[0].innerHTML}'}, ${index})">${element.getElementsByTagName("a")[0].innerHTML}</div>\n${episodes.innerHTML}`;
         });
 
         if (x<max) {
@@ -37,8 +43,7 @@ const select = (anime) => {
     });
 }
 
-
-searchBtn.addEventListener("click", () => {
+const search = () => {
     results.innerHTML = '';
     request(`http://anilinkz.to/search?q=${searchInp.value.split(" ").join("+")}`, (err, res, body) => {
         body = new jsdom.JSDOM(body).window.document;
@@ -55,7 +60,19 @@ searchBtn.addEventListener("click", () => {
         setTimeout(()=> {
             episodes.style.display = "none";
         },500);
-    });
+    })
+}
+
+searchInp.addEventListener("keyup", (e) => {
+    if (e.keyCode == 13) {
+        search();
+    }
+});
+
+
+searchBtn.addEventListener("click", () => {
+    search();
+});
     
     
     
@@ -67,7 +84,6 @@ searchBtn.addEventListener("click", () => {
         });
     });
     */
-});
 
 results.style.height=`${window.innerHeight-60}px`
 episodes.style.height=`${window.innerHeight-60}px`

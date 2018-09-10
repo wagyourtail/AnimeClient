@@ -62,11 +62,10 @@ body {
 #searchBtn {
     margin-top: 10px;
     cursor: pointer;
-    width: 80px;
-    height: 80px;
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
+}
+
+#searchBtn:hover {
+    background-color: rgba(128, 128, 128, .2);
 }
 
 #maincontent {
@@ -81,6 +80,39 @@ body {
     transition: opacity .5s;
 }
 
+#contentTitle {
+    color: white;
+}
+
+#prev {
+    cursor: pointer;
+    width: 356px;
+    display: inline-block;
+    background-color: rgba(64,64,64,.2);
+}
+
+#next {
+    cursor: pointer;
+    width: 356px;
+    display: inline-block;
+    background-color: rgba(64,64,64,.2);
+}
+
+#prev:hover {
+    background-color: rgba(128,128,128,.2);
+}
+
+#next:hover {
+    background-color: rgba(128,128,128,.2);
+}
+
+#contentSrc {
+    display: block;
+    border: none;
+    background-color: rgba(64,64,64,.7);
+}
+
+
 #searchPanel {
     z-index: 1;
     transition: .5s ease all;
@@ -88,15 +120,6 @@ body {
     overflow-x: none;
     overflow-y: scroll;
     background-color: rgba(64, 64, 64, .4);
-}
-
-#contentTitle {
-    color: white;
-}
-
-#contentSrc {
-    border: none;
-    background-color: rgba(64,64,64,.7);
 }
 
 #rightbar {
@@ -109,12 +132,32 @@ body {
     transition: .5s ease all;
 }
 
-#sources {
-    width: 100%;
-    background-color: rgba(64,64,64,.7);
-    overflow-y: scroll;
+#rightbarLoad {
+    width: 300px;
+}
+
+
+
+#sources div {
+    display: inline-block;
+    color: white;
+    cursor: pointer;
+    width: 120px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 10px;
+    background-color: rgba(64,64,64,.5);
+}
+
+#sources .select:hover {
+    background-color: rgba(128,128,128,.5);
+}
+
+#sources .current {
+    background-color: rgba(32,32,32,.8);
 }
 
 #rightbar:hover {
     width: 300px;
 }
+

@@ -36,6 +36,7 @@ body {
     display: inline-block;
     cursor: pointer;
     padding: 10px;
+    color: white;
 }
 
 #searchBtn:hover {
@@ -72,6 +73,10 @@ body {
     padding: 10px;
     background-color: rgba(64, 64, 64, .2); 
     width: 400px;
+}
+
+.aniTile:hover {
+    background-color: rgba(128, 128, 128, .2); 
 }
 
 .aniTile img {
@@ -119,4 +124,8 @@ body {
     background-color: rgba(64, 64, 64, .2);
     width: 200px;
     font-size: 1em;
+}
+
+.epTile:hover {
+    background-color: rgba(128, 128, 128, .2);
 }

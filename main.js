@@ -8,7 +8,7 @@ let win;
 
 
 function createWindow() {
-    win  = new BrowserWindow({frame:false,width:1440, height:900});
+    win  = new BrowserWindow({frame:false,width:1440, height:900, webPreferences:{allowRunningInsecureContent: true}});
 
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'src/html/index.html'),
@@ -17,7 +17,12 @@ function createWindow() {
     }));
 
     win.webContents.openDevTools();
-
+    
+    win.webContents.on('new-window', function(e, url) {
+        logData("stop popup", e)
+        logData("stop popup", url)
+        e.preventDefault();
+      });
     
     win.on('closed', () => {
         win = null;
