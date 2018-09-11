@@ -9,7 +9,6 @@ let sources = [];
 Array.from(document.getElementById("sources").getElementsByTagName("a")).forEach(src => {
         sources.push({site:src.innerHTML, src:src.href})
 });
-console.log(sources)
 ipc.sendToHost("srcList", sources)
 
 

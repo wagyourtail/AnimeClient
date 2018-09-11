@@ -2,7 +2,7 @@ const electron = require("electron")
 const fs = require("fs")
 const remote = electron.remote;
 let SRCnow = "";
-
+let prefSite = {site:"", index:0};
 let retNext = () => {
     searchPanelLoad.send("retPrevNext", 0)
 }
@@ -12,6 +12,7 @@ let retPrev = () => {
 }
 
 let changeSrc = (src) => {
+    prefSite = {site:"", index:0};
     silentLoad.src = src
     SRCnow = src
 }
@@ -44,8 +45,24 @@ silentLoad.addEventListener("ipc-message", (m) => {
         for (let a = 0; a < m.args[0].length; a++) {
             sources.innerHTML = `${sources.innerHTML}\n<div class="${SRCnow == m.args[0][a].src ? "current" : "select"}" id="${m.args[0][a].src}" onclick="${SRCnow == m.args[0][a].src ? "//" : ""}changeSrc('${m.args[0][a].src}')">${m.args[0][a].site}</div>`;
         }
+        if (prefSite.site && !(document.getElementsByClassName("current")[0].innerHTML == prefSite.site)) {
+            let src = Array.from(document.getElementsByClassName("select")).filter(element => {
+                return element.innerHTML == prefSite.site;
+            });
+            if (src) {
+                changeSrc(src[prefSite.index] ? src[prefSite.index].id : src[0].id);
+            }
+        } else if (!prefSite.site){
+            const site = document.getElementsByClassName("current")[0].innerHTML;
+            const index = Array.from(sources.getElementsByTagName("div")).filter(element => {
+                return element.innerHTML == site;
+            }).findIndex(element => {
+                return element.getAttribute("class") == "current";
+            });
+            prefSite = {site:site, index:index};
+        }
     } else if (m.channel == "currentSrc") {
-        contentSrc.src = m.args[0].src
+        contentSrc.src = m.args[0].src;
     } else {
         console.log(m)
     }

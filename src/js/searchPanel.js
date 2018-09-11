@@ -25,6 +25,8 @@ let loopedRequest = async (anime,x,max) => {
 
         if (x<max) {
             loopedRequest(anime,x+1,max);
+        } else {
+            loading.setAttribute("style", loading.getAttribute("style").replace("fixed", "none"));
         }
     });
 }
@@ -34,6 +36,7 @@ const select = (anime) => {
     request(`http://anilinkz.to/${anime}`, async (err, res, body) => {
         let max = parseInt(body.match(/pages: (\d+)/)[1]);
         loopedRequest(anime,1,max);
+        loading.setAttribute("style", loading.getAttribute("style").replace("none", "fixed"));
         episodes.style.display = "block";
         episodes.style.opacity = "1";
         results.style.opacity = "0";
@@ -45,15 +48,17 @@ const select = (anime) => {
 
 const search = () => {
     results.innerHTML = '';
+    loading.setAttribute("style", loading.getAttribute("style").replace("none", "fixed"));
     request(`http://anilinkz.to/search?q=${searchInp.value.split(" ").join("+")}`, (err, res, body) => {
         body = new jsdom.JSDOM(body).window.document;
+        results.innerHTML = '';
         Array.from(body.getElementById("seariessearchlist").getElementsByTagName("li")).forEach(element=> {
             const title = element.getElementsByTagName("a")[0].title
             const image = element.getElementsByClassName("img")[0].style.backgroundImage.replace("url(", "http://anilinkz.to/").replace(")", "")
             const href = element.getElementsByTagName("a")[0].href
             results.innerHTML = `${results.innerHTML}\n<table class="aniTile" onclick="select('${href}')"><tr><td><img src="${image}"></td><td><div id="title">${title}</div></td></tr></table>`
         });
-
+        loading.setAttribute("style", loading.getAttribute("style").replace("fixed", "none"));
         results.style.display = "block";
         results.style.opacity = "1";
         episodes.style.opacity = "0";
@@ -87,7 +92,9 @@ searchBtn.addEventListener("click", () => {
 
 results.style.height=`${window.innerHeight-60}px`
 episodes.style.height=`${window.innerHeight-60}px`
+loading.style.top = `${(window.innerHeight-60)/2}px`
 window.addEventListener("resize", () => {
     results.style.height=`${window.innerHeight-60}px`
     episodes.style.height=`${window.innerHeight-60}px`
+    loading.style.top = `${(window.innerHeight-60)/2}px`
 });

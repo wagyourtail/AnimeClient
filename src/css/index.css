@@ -88,6 +88,8 @@ body {
     cursor: pointer;
     width: 356px;
     display: inline-block;
+    color: white;
+    font-size: 3em;
     background-color: rgba(64,64,64,.2);
 }
 
@@ -95,6 +97,8 @@ body {
     cursor: pointer;
     width: 356px;
     display: inline-block;
+    color: white;
+    font-size: 3em;
     background-color: rgba(64,64,64,.2);
 }
 
