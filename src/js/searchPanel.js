@@ -49,7 +49,7 @@ const select = (anime) => {
 const search = () => {
     results.innerHTML = '';
     loading.setAttribute("style", loading.getAttribute("style").replace("none", "fixed"));
-    request(`http://anilinkz.to/search?q=${searchInp.value.split(" ").join("+")}`, (err, res, body) => {
+    request(`http://anilinkz.to/search?q=${searchInp.value.split(" ").join("+").toLowerCase()}`, (err, res, body) => {
         body = new jsdom.JSDOM(body).window.document;
         results.innerHTML = '';
         Array.from(body.getElementById("seariessearchlist").getElementsByTagName("li")).forEach(element=> {
