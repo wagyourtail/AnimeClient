@@ -1,7 +1,7 @@
 {
-  "name": "aniwatcher",
+  "name": "animeclient",
   "version": "1.0.0",
-  "description": "",
+  "description": "anilinkz client for windows",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
