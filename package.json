@@ -1,6 +1,6 @@
 {
   "name": "animeclient",
-  "version": "1.2.0",
+  "version": "1.2",
   "description": "anilinkz client for windows",
   "main": "main.js",
   "scripts": {
