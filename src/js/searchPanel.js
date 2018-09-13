@@ -15,56 +15,65 @@ ipc.on("retPrevNext", (e, index)=> {
     }
 });
 
-let loopedRequest = async (anime,x,max) => {
-    request(`http://anilinkz.to/${anime}?page=${x}`, (err, res, body) => {
-        body = new jsdom.JSDOM(body).window.document;
-        epser = Array.from(body.getElementsByClassName("epser"));
-        epser.forEach((element, index) => {
-            episodes.innerHTML = `<div class="epTile" id="${element.getElementsByTagName("a")[0].innerHTML}" onclick="sendEpisode({src:'${element.getElementsByTagName("a")[0].href}', title:'${element.getElementsByTagName("a")[0].innerHTML}'}, ${index})">${element.getElementsByTagName("a")[0].innerHTML}</div>\n${episodes.innerHTML}`;
+let loopedRequest = (anime,x,max) => {
+    return new Promise((resolve, reject) => {
+        request(`http://anilinkz.to/${anime}?page=${x}`, (err, res, body) => {
+            body = new jsdom.JSDOM(body).window.document;
+            let arr = Array.from(body.getElementsByClassName("epser"));
+            if (x<max) {
+                loopedRequest(anime,x+1,max).then((a) => {
+                    resolve(arr.concat(a));
+                });
+            } else {
+                resolve(arr);
+            }
         });
-
-        if (x<max) {
-            loopedRequest(anime,x+1,max);
-        } else {
-            loading.setAttribute("style", loading.getAttribute("style").replace("fixed", "none"));
-        }
     });
 }
 
 const select = (anime) => {
-    episodes.innerHTML = "";
+    anilinkzEpisodes.innerHTML = "";
+    anilinkzResults.style.opacity = "0";
+    setTimeout(()=> {
+        anilinkzResults.style.display = "none";
+    },500);
+    anilinkzLoading.setAttribute("style", anilinkzLoading.getAttribute("style").replace("none", "fixed"));
     request(`http://anilinkz.to/${anime}`, async (err, res, body) => {
         let max = parseInt(body.match(/pages: (\d+)/)[1]);
-        loopedRequest(anime,1,max);
-        loading.setAttribute("style", loading.getAttribute("style").replace("none", "fixed"));
-        episodes.style.display = "block";
-        episodes.style.opacity = "1";
-        results.style.opacity = "0";
-        setTimeout(()=> {
-            results.style.display = "none";
-        },500);
+        loopedRequest(anime,1,max).then((arr) => {
+            epser = arr;
+            epser.forEach((element, index) => {
+                if (!document.getElementById(element.getElementsByTagName("a")[0].innerHTML)) {
+                    anilinkzEpisodes.innerHTML = `<div class="epTile" id="${element.getElementsByTagName("a")[0].innerHTML}" onclick="sendEpisode({src:'${element.getElementsByTagName("a")[0].href}', title:'${element.getElementsByTagName("a")[0].innerHTML}'}, ${index})">${element.getElementsByTagName("a")[0].innerHTML}</div>\n${anilinkzEpisodes.innerHTML}`;
+                } 
+            });
+            anilinkzLoading.setAttribute("style", anilinkzLoading.getAttribute("style").replace("fixed", "none"));
+        }).catch(console.log);
+        
+        anilinkzEpisodes.style.display = "block";
+        anilinkzEpisodes.style.opacity = "1";
     });
 }
 
 const search = () => {
-    results.innerHTML = '';
-    loading.setAttribute("style", loading.getAttribute("style").replace("none", "fixed"));
+    anilinkzResults.innerHTML = '';
+    anilinkzEpisodes.style.opacity = "0";
+    setTimeout(()=> {
+        anilinkzEpisodes.style.display = "none";
+    },500);
+    anilinkzLoading.setAttribute("style", anilinkzLoading.getAttribute("style").replace("none", "fixed"));
     request(`http://anilinkz.to/search?q=${searchInp.value.split(" ").join("+").toLowerCase()}`, (err, res, body) => {
         body = new jsdom.JSDOM(body).window.document;
-        results.innerHTML = '';
+        anilinkzResults.innerHTML = '';
         Array.from(body.getElementById("seariessearchlist").getElementsByTagName("li")).forEach(element=> {
             const title = element.getElementsByTagName("a")[0].title
             const image = element.getElementsByClassName("img")[0].style.backgroundImage.replace("url(", "http://anilinkz.to/").replace(")", "")
             const href = element.getElementsByTagName("a")[0].href
-            results.innerHTML = `${results.innerHTML}\n<table class="aniTile" onclick="select('${href}')"><tr><td><img src="${image}"></td><td><div id="title">${title}</div></td></tr></table>`
+            anilinkzResults.innerHTML = `${anilinkzResults.innerHTML}\n<table class="serTile" onclick="select('${href}')"><tr><td><img src="${image}"></td><td><div id="title">${title}</div></td></tr></table>`
         });
-        loading.setAttribute("style", loading.getAttribute("style").replace("fixed", "none"));
-        results.style.display = "block";
-        results.style.opacity = "1";
-        episodes.style.opacity = "0";
-        setTimeout(()=> {
-            episodes.style.display = "none";
-        },500);
+        anilinkzLoading.setAttribute("style", anilinkzLoading.getAttribute("style").replace("fixed", "none"));
+        anilinkzResults.style.display = "block";
+        anilinkzResults.style.opacity = "1";
     })
 }
 
@@ -81,20 +90,15 @@ searchBtn.addEventListener("click", () => {
     
     
     
-    /*request(`http://api.jikan.moe/v3/search/anime?q="${searchInp.value}"`, (err, res, body) => {
-        body = JSON.parse(body);
+    // request(`http://api.jikan.moe/v3/search/anime?q="${searchInp.value}"`, (err, res, body) => {
+    //     body = JSON.parse(body);
 
-        body.results.forEach(result => {
-            results.innerHTML = `${results.innerHTML}\n<div class="aniTile" id="${result.mal_id}" onclick="select(${result.mal_id})"><div><img id="image" src="${result.image_url}"></div><div><div id="title">${result.title}</div><div id="score">Score ${result.score}</div><div id="eps">Episodes ${result.episodes ? result.episodes : "?"}</div></div></div>`
-        });
-    });
-    */
+    //     body.anilinkzResults.forEach(result => {
+    //         anilinkzResults.innerHTML = `${anilinkzResults.innerHTML}\n<div class="aniTile" id="${result.mal_id}" onclick="select(${result.mal_id})"><div><img id="image" src="${result.image_url}"></div><div><div id="title">${result.title}</div><div id="score">Score ${result.score}</div><div id="eps">anilinkzEpisodes ${result.anilinkzEpisodes ? result.anilinkzEpisodes : "?"}</div></div></div>`
+    //     });
+    // });
 
-results.style.height=`${window.innerHeight-60}px`
-episodes.style.height=`${window.innerHeight-60}px`
-loading.style.top = `${(window.innerHeight-60)/2}px`
+content.style.height = `${window.innerHeight-70}px`
 window.addEventListener("resize", () => {
-    results.style.height=`${window.innerHeight-60}px`
-    episodes.style.height=`${window.innerHeight-60}px`
-    loading.style.top = `${(window.innerHeight-60)/2}px`
+    content.style.height = `${window.innerHeight-70}px`
 });
